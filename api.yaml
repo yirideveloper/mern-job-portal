@@ -307,6 +307,39 @@ paths:
       responses:
         '200':
           description: Connection successful
+  '/users/recruiter/{id}/dashboard':
+    get:
+      tags:
+        - users
+        - recruiter
+      summary: Get data to populate dashboard of recruiter
+      description: Get data to populate info graphics on the dashboard of recruiter
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RecruiterDasboard'
+  '/users/applicant/{id}/dashboard':
+    get:
+      tags:
+        - users
+        - applicant
+      summary: Get data to populate dashboard of applicant
+      description: Get data to populate info graphics on the dashboard of applicant
+      parameters:
+        - $ref: '#/components/parameters/userId'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApplicantDasboard'
+
 components:
   schemas:
     User:
@@ -507,6 +540,73 @@ components:
           type: string
         cover_letter:
           type: string
+    RecruiterDasboard:
+      type: object
+      properties:
+        hot_job:
+          type: array
+          items:
+            $ref: '#/components/schemas/Graph'
+        city_hot_job:
+          type: array
+          items:
+            $ref: '#/components/schemas/Graph'
+        cold_job:
+          type: array
+          items:
+            $ref: '#/components/schemas/Graph'
+        click_count_job:
+          type: array
+          items:
+            $ref: '#/components/schemas/Graph'
+        total_count:
+          type: integer
+          format: int64
+        incomplete_count:
+          type: integer
+          format: int64
+        saved_count:
+          type: integer
+          format: int64
+      required:
+        - hot_job
+        - city_hot_job
+        - cold_job
+        - click_count_job
+    ApplicantDasboard:
+      type: object
+      properties:
+        profile_view:
+          type: array
+          items:
+            $ref: '#/components/schemas/Graph'
+        profile_view_count:
+          type: integer
+          format: int64
+        connection_count:
+          type: integer
+          format: int64
+        applied_count:
+          type: integer
+          format: int64
+        saved_count:
+          type: integer
+          format: int64
+      required:
+        - hot_job
+        - city_hot_job
+        - cold_job
+        - click_count_job
+    Graph:
+      type: object
+      properties:
+        key:
+          type: string
+          format: date
+        value:
+          type: integer
+          format: int64
+
   parameters:
     jobId:
       name: id
