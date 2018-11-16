@@ -3,62 +3,69 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const name = require('./name.model')
-const experience = require('./experience.model')
-const education = require('./education.model')
 
 const applicantSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
-    ref: 'users',
-    required: true
+    ref: 'users'
   },
   name: {
-    type: name.schema,
+    type: [name.nameSchema],
     required: true
   },
   address: {
     type: String,
-    maxlength: 100
+    maxlength: 50,
+    required: true
   },
   city: {
     type: String,
-    maxlength: 100
+    required: true
   },
   state: {
     type: Number,
-    maxlength: 100
+    maxlength: 50,
+    required: true
   },
   zipcode: {
     type: Number,
-    maxlength: 100
+    maxlength: 50,
+    required: true
   },
   experience: {
-    type: experience.schema,
-    maxlength: 100
+    type: String,
+    maxlength: 50,
+    required: true
   },
   education: {
-    type: education.schema,
-    maxlength: 100
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   skills: {
-    type: String,
-    maxlength: 100
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   summary: {
-    type: String,
-    maxlength: 5000
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   resume: {
     type: String,
-    maxlength: 100
+    maxlength: 50,
+    required: true
   },
   profile_image: {
-    type: String,
-    maxlength: 100
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   banner_image: {
     type: String,
-    maxlength: 100
+    maxlength: 50,
+    required: true
   }
 }, {
   timestamps: true
@@ -67,7 +74,7 @@ const applicantSchema = new Schema({
 applicantSchema.method({
   transform () {
     const transformed = {}
-    const fields = ['id', 'name', 'address', 'city', 'state', 'zipcode', 'experience', 'education', 'skills', 'summary', 'resume', 'profile_image', 'banner_image']
+    const fields = ['userId']
     fields.forEach((field) => {
       transformed[field] = this[field]
     })

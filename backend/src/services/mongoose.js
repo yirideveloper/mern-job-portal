@@ -18,11 +18,10 @@ if (config.env === 'dev') {
 }
 
 exports.connect = () => {
-  var mongoURI = config.mongo.uri
+  var mongoURI = config.mongo.uri;
 
   mongoose.connect(mongoURI, {
-    keepAlive: 1,
-    useNewUrlParser: true
+    keepAlive: 1
   })
 
   return mongoose.connection
