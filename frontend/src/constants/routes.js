@@ -1,1 +1,0 @@
-export const APPLICANT_LOGIN_ROUTE = '/'
