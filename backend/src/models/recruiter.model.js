@@ -3,32 +3,79 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const name = require('./name.model')
-const address = require('./address.model')
 
 const recruiterSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: 'users'
   },
   name: {
-    type: name.schema,
+    type: [name.nameSchema],
     required: true
   },
   address: {
-    type: address.schema
+    type: String,
+    maxlength: 50,
+    required: true,
+    index: true
   },
-  phone_number: {
-    type: Number
+  headline: {
+    type: String,
+    maxlength: 50,
+    required: true
   },
-  company: {
-    type: String
+  description: {
+    type: String,
+    required: true
   },
-  profile_image: {
-    type: String
+  accomodate: {
+    type: Number,
+    maxlength: 50,
+    required: true
   },
-  banner_image: {
-    type: String
+  bathroom: {
+    type: Number,
+    maxlength: 50,
+    required: true
+  },
+  amenities: {
+    type: String,
+    maxlength: 50,
+    required: true
+  },
+  area: {
+    type: Number,
+    maxlength: 50,
+    required: true
+  },
+  startDate: {
+    type: Number,
+    maxlength: 50,
+    required: true
+  },
+  endDate: {
+    type: Number,
+    maxlength: 50,
+    required: true
+  },
+  currency: {
+    type: String,
+    maxlength: 50,
+    required: true
+  },
+  minimumStayingNight: {
+    type: Number,
+    maxlength: 50,
+    required: true
+  },
+  nightlyBaseRate: {
+    type: Number,
+    maxlength: 50,
+    required: true
+  },
+  imageList: {
+    type: String,
+    required: true
   }
 }, {
   timestamps: true
@@ -37,7 +84,7 @@ const recruiterSchema = new Schema({
 recruiterSchema.method({
   transform () {
     const transformed = {}
-    const fields = ['id', 'name', 'address', 'city', 'state', 'zipcode', 'phone_number', 'company', 'profile_image', 'banner_image']
+    const fields = ['ownerId', 'address', 'headline', 'description', 'type', 'bedroom', 'accomodate', 'bathroom', 'amenities', 'area', 'startDate', 'endDate', 'currency', 'minimumStayingSight', 'nightlyBaseRate', 'imageList']
     fields.forEach((field) => {
       transformed[field] = this[field]
     })

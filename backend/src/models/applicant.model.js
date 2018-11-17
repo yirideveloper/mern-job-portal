@@ -3,51 +3,69 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const name = require('./name.model')
-const experience = require('./experience.model')
-const education = require('./education.model')
 
 const applicantSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: 'users'
   },
   name: {
-    type: name.schema,
+    type: [name.nameSchema],
     required: true
   },
   address: {
-    type: String
+    type: String,
+    maxlength: 50,
+    required: true
   },
   city: {
-    type: String
+    type: String,
+    required: true
   },
   state: {
-    type: Number
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   zipcode: {
-    type: Number
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   experience: {
-    type: experience.schema
+    type: String,
+    maxlength: 50,
+    required: true
   },
   education: {
-    type: education.schema
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   skills: {
-    type: String
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   summary: {
-    type: String
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   resume: {
-    type: String
+    type: String,
+    maxlength: 50,
+    required: true
   },
   profile_image: {
-    type: String
+    type: Number,
+    maxlength: 50,
+    required: true
   },
   banner_image: {
-    type: String
+    type: String,
+    maxlength: 50,
+    required: true
   }
 }, {
   timestamps: true
@@ -56,7 +74,7 @@ const applicantSchema = new Schema({
 applicantSchema.method({
   transform () {
     const transformed = {}
-    const fields = ['id', 'name', 'address', 'city', 'state', 'zipcode', 'experience', 'education', 'skills', 'summary', 'resume', 'profile_image', 'banner_image']
+    const fields = ['userId']
     fields.forEach((field) => {
       transformed[field] = this[field]
     })
