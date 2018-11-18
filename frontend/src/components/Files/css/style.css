@@ -886,13 +886,11 @@ main {
 }
 .sd-title i {
 	float: right;
-	font-size: 25px;
+	color: #b7b7b7;
+	font-size: 30px;
 	position: absolute;
-	right: 10px;
+	right: 5px;
 	top: 15px;
-	color: transparent;
-    -webkit-text-stroke-width: 2px;
-    -webkit-text-stroke-color: #0073b1;
 }
 .suggestions-list {
 	float: left;
@@ -2618,7 +2616,7 @@ footer {
 .user-pro-img {
 	float: left;
 	width: 100%;
-	text-align: left;
+	text-align: center;
 	margin-bottom: 28px;
 	margin-top: -95px;
 	position: relative;
