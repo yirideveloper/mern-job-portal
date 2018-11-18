@@ -57,12 +57,12 @@ class Header extends Component {
 									</a>
 							</li>
 							<li>
-									<Link to="/message">
+									<a href="index.html" title="">
 										<div>
 											<i className="fa fa-comment-alt header-icons"></i>
 										</div>
 										Messaging
-									</Link>
+									</a>
 							</li>
 							{/* <!--<li>
 								<a href="profiles.html" title="">
