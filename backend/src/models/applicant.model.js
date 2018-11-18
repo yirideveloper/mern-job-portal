@@ -3,6 +3,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const name = require('./name.model')
+const address = require('./address.model')
 const experience = require('./experience.model')
 const education = require('./education.model')
 
@@ -10,32 +11,24 @@ const applicantSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true
+    required: true,
+    index: true
   },
   name: {
     type: name.schema,
     required: true
   },
   address: {
-    type: String
-  },
-  city: {
-    type: String
-  },
-  state: {
-    type: Number
-  },
-  zipcode: {
-    type: Number
+    type: address.schema
   },
   experience: {
-    type: experience.schema
+    type: [experience.schema]
   },
   education: {
-    type: education.schema
+    type: [education.schema]
   },
   skills: {
-    type: String
+    type: [String]
   },
   summary: {
     type: String
@@ -56,7 +49,7 @@ const applicantSchema = new Schema({
 applicantSchema.method({
   transform () {
     const transformed = {}
-    const fields = ['id', 'name', 'address', 'city', 'state', 'zipcode', 'experience', 'education', 'skills', 'summary', 'resume', 'profile_image', 'banner_image']
+    const fields = ['id', 'name', 'address', 'experience', 'education', 'skills', 'summary', 'resume', 'profile_image', 'banner_image']
     fields.forEach((field) => {
       transformed[field] = this[field]
     })
