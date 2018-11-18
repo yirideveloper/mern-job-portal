@@ -26,22 +26,13 @@ class SearchedJobs extends Component {
 
         </div>
 
-        <div className="container">
-        <div className="row">
+        <div>
+        <div>
         
-        <div className="col-md-5  job-view">
-            
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
-                <JobCard/>
-             </div>
+        <div className="row job-view">
+            <div className="col-md-5 left-job-detail">
+            <JobCard/>
+            </div>
 
             <div className="col-md-7">
 
@@ -56,6 +47,7 @@ class SearchedJobs extends Component {
 
 
 
+      </div>
     )
   }
 }
