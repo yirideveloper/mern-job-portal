@@ -9,8 +9,7 @@ const recruiterSchema = new Schema({
   id: {
     type: Schema.Types.ObjectId,
     ref: 'User',
-    required: true,
-    index: true
+    required: true
   },
   name: {
     type: name.schema,
