@@ -60,7 +60,7 @@ exports.putOne = async (req, res, next) => {
       response.message = 'SUCCESS'
       response.payLoad = updatedUserDetails
       res.status(httpStatus.OK)
-      res.send(response)
+      res.send(updatedUserDetails)
     } else {
       throw new APIError(`User with id: ${userId} not updated`, httpStatus.NOT_FOUND)
     }
