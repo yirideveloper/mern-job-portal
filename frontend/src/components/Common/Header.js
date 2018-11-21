@@ -41,7 +41,7 @@ class Header extends Component {
 									</a>
 								</li>
 							<li>
-									<Link to= "/jobshome">
+									<Link to= "/jobs">
 										<div>
 											<i className="fa fa-briefcase header-icons"></i>
 										</div>

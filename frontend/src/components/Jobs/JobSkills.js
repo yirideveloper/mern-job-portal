@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import "./jobs.css";
 import Watch from '../Files/Images/Watch.svg';
 import Tick from '../Files/Images/tick.svg';
-
 class JobSkills extends Component {
 constructor(props){
     super(props)

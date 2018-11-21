@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 
 import "./jobs.css";
 import JobSkills from "./JobSkills";
-import JobFunctions from "./JobFunctions"
+import JobDetails from "./JobFunctions"
 import JobRecruiter from "./JobRecruiter";
 
 import Watch from '../Files/Images/Watch.svg';
 import Logo from '../Files/Images/linkedinlogo.png';
 import $ from 'jquery'; 
 
-class JobDetailedView extends Component {
+class JobSingle extends Component {
 
 
   constructor(props){
@@ -161,7 +161,8 @@ General understanding of venture capital space and familiarity with top VC firms
               <div className="col-md-4 job-description-partition">
                   <JobSkills/>
                   <JobRecruiter/>
-                  <JobFunctions />                  
+                  <JobDetails></JobDetails>
+                  
               </div>
               </div>
               
@@ -170,4 +171,4 @@ General understanding of venture capital space and familiarity with top VC firms
     )
   }
 }
-export default JobDetailedView;
+export default JobSingle;
