@@ -5,7 +5,7 @@ import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import fulllogo from "../Files/Images/full-logo.png";
 //import { api } from "../../services/Axios";
-import { api , printError, printMessage} from '../../services/';
+import { api , printError} from '../../services/';
 import "./Home.css";
 
 
@@ -20,8 +20,6 @@ class HomePage extends React.Component {
       lastname: "",
       newemail: "",
       newpassword: "",
-      loginemail : "",
-      loginpassword : "",
       authFlag: false,
       signedUp: false
     };
@@ -40,24 +38,14 @@ class HomePage extends React.Component {
 
   handleLogin = async e => {
       
-      let _t = this;
       let data = {
-        "email": this.state.loginemail,//"saketthakare@gmail.com",
-        "password": this.state.loginpassword
+        "email": "saketthakare@gmail.com",
+        "password": "saket123"
       };
       console.log(data);
       try {
         let ret = await api('POST','/auth/login',data);
         console.log(ret);
-        if(ret.status>=200 && ret.status<300)
-        {
-            sessionStorage.setItem("user_token",ret['data']['token']);
-            printMessage("Login successful.");
-            _t.setState({
-              loginemail : '',
-              loginpassword : ''
-            });
-        }
       } catch (error) {
         console.log(Object.keys(error), error.response);
         printError(error);
@@ -66,7 +54,6 @@ class HomePage extends React.Component {
 
   async usersignup()
   { 
-      let _t = this;
       let data = {
         "email": this.state.email,
         "password": this.state.password,
@@ -80,24 +67,7 @@ class HomePage extends React.Component {
     try {
       let ret = await api('POST','/auth/signup',data);
       console.log(ret);
-      console.log()
-      if(ret.status>=200 && ret.status<300)
-      {
-          printMessage("Success! You have registered successfully! Please login to continue");
-          _t.setState({
-            email : '',
-            password : '',
-            firstname : '',
-            lastname : ''
-          });
-      }
-      else 
-      {
-          throw "error";
-      }
-    } 
-    catch (error) 
-    {
+    } catch (error) {
       console.log(Object.keys(error), error.response);
       printError(error);
     }
@@ -134,18 +104,14 @@ class HomePage extends React.Component {
                       type="text"
                       id="loginemail"
                       name="loginemail"
-                      onChange={this.onChange}
-                      value={this.state.loginemail}
                       placeholder="Email"
                       aria-label="Email"
                     />
                     <input
                       class="form-control mr-sm-2"
-                      id="loginpassword"
-                      name="loginpassword"
+                      id="password"
+                      name="password"
                       type="password"
-                      onChange={this.onChange}
-                      value={this.state.loginpassword}
                       placeholder="Password"
                       aria-label="Password"
                     />
@@ -179,7 +145,6 @@ class HomePage extends React.Component {
                       type="text"
                       class="form-control"
                       onChange={this.onChange}
-                      value={this.state.firstname}
                       name="firstname"
                       id="firstname"
                       autocomplete="off"
@@ -191,7 +156,6 @@ class HomePage extends React.Component {
                       type="text"
                       class="form-control"
                       onChange={this.onChange}
-                      value={this.state.lastname}
                       name="lastname"
                       id="lastname"
                       autocomplete="off"
@@ -203,7 +167,6 @@ class HomePage extends React.Component {
                       type="email"
                       class="form-control"
                       onChange={this.onChange}
-                      value={this.state.email}
                       name="email"
                       id="email"
                       autocomplete="off"
@@ -217,7 +180,6 @@ class HomePage extends React.Component {
                       type="password"
                       class="form-control"
                       onChange={this.onChange}
-                      value={this.state.password}
                       id="password"
                       name="password"
                       autocomplete="off"
