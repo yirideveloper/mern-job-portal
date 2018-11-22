@@ -14,7 +14,7 @@ constructor(props){
 }
   render() {
       let skills=null;
-      skills =this.props.skills.map(skill => {
+      skills =this.state.skills.map(skill => {
         return(
             <div class="row">
             <div class="col-md-1 image-tick">

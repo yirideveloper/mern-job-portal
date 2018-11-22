@@ -5,11 +5,15 @@ import { Redirect } from "react-router";
 import { connect } from "react-redux";
 import fulllogo from "../Files/Images/full-logo.png";
 //import { api } from "../../services/Axios";
-import { api , printError} from '../../services/';
+import { api , printError, printMessage} from '../../services/';
+import jwt_decode from 'jwt-decode';
+import login from '../../actions/login';
+
 import "./Home.css";
 
 
 class HomePage extends React.Component {
+
   constructor(props) {
     super(props);
     console.log(printError);
@@ -20,6 +24,8 @@ class HomePage extends React.Component {
       lastname: "",
       newemail: "",
       newpassword: "",
+      loginemail : "",
+      loginpassword : "",
       authFlag: false,
       signedUp: false
     };
@@ -27,6 +33,22 @@ class HomePage extends React.Component {
     this.onChange = this.onChange.bind(this);
     this.usersignup = this.usersignup.bind(this);
   }
+
+  componentWillReceiveProps(nextProps) 
+  {
+      console.log(nextProps);
+      try 
+      {
+        if (nextProps.LoginReducer.user_id && nextProps.LoginReducer.user_token) {
+          this.props.history.push('/jobshome');
+        }
+      }
+      catch(e)
+      {
+        console.log(e);
+      }
+  }
+
 
   onChange = e => this.setState({ [e.target.name]: e.target.value });
 
@@ -38,22 +60,42 @@ class HomePage extends React.Component {
 
   handleLogin = async e => {
       
+    let data = {
+      "email": this.state.loginemail,//"saketthakare@gmail.com",
+      "password": this.state.loginpassword
+    };
+      this.props.dispatch(login(data));
+      /* let _t = this;
       let data = {
-        "email": "saketthakare@gmail.com",
-        "password": "saket123"
+        "email": this.state.loginemail,//"saketthakare@gmail.com",
+        "password": this.state.loginpassword
       };
       console.log(data);
       try {
         let ret = await api('POST','/auth/login',data);
         console.log(ret);
+        if(ret.status>=200 && ret.status<300)
+        {
+            var decoded = jwt_decode(ret['data']['token']);
+            sessionStorage.setItem("user_id",decoded['sub']);
+            sessionStorage.setItem("profile",decoded['role']);
+            sessionStorage.setItem("user_token",ret['data']['token']);
+            printMessage("Login successful.");
+            _t.setState({
+              loginemail : '',
+              loginpassword : ''
+            });
+        }
       } catch (error) {
-        console.log(Object.keys(error), error.response);
+        console.log(error); 
+        //console.log( error.response);
         printError(error);
-      }
+      } */
   }
 
   async usersignup()
   { 
+      let _t = this;
       let data = {
         "email": this.state.email,
         "password": this.state.password,
@@ -67,7 +109,24 @@ class HomePage extends React.Component {
     try {
       let ret = await api('POST','/auth/signup',data);
       console.log(ret);
-    } catch (error) {
+      console.log()
+      if(ret.status>=200 && ret.status<300)
+      {
+          printMessage("Success! You have registered successfully! Please login to continue");
+          _t.setState({
+            email : '',
+            password : '',
+            firstname : '',
+            lastname : ''
+          });
+      }
+      else 
+      {
+          throw "error";
+      }
+    } 
+    catch (error) 
+    {
       console.log(Object.keys(error), error.response);
       printError(error);
     }
@@ -104,14 +163,18 @@ class HomePage extends React.Component {
                       type="text"
                       id="loginemail"
                       name="loginemail"
+                      onChange={this.onChange}
+                      value={this.state.loginemail}
                       placeholder="Email"
                       aria-label="Email"
                     />
                     <input
                       class="form-control mr-sm-2"
-                      id="password"
-                      name="password"
+                      id="loginpassword"
+                      name="loginpassword"
                       type="password"
+                      onChange={this.onChange}
+                      value={this.state.loginpassword}
                       placeholder="Password"
                       aria-label="Password"
                     />
@@ -145,6 +208,7 @@ class HomePage extends React.Component {
                       type="text"
                       class="form-control"
                       onChange={this.onChange}
+                      value={this.state.firstname}
                       name="firstname"
                       id="firstname"
                       autocomplete="off"
@@ -156,6 +220,7 @@ class HomePage extends React.Component {
                       type="text"
                       class="form-control"
                       onChange={this.onChange}
+                      value={this.state.lastname}
                       name="lastname"
                       id="lastname"
                       autocomplete="off"
@@ -167,6 +232,7 @@ class HomePage extends React.Component {
                       type="email"
                       class="form-control"
                       onChange={this.onChange}
+                      value={this.state.email}
                       name="email"
                       id="email"
                       autocomplete="off"
@@ -180,6 +246,7 @@ class HomePage extends React.Component {
                       type="password"
                       class="form-control"
                       onChange={this.onChange}
+                      value={this.state.password}
                       id="password"
                       name="password"
                       autocomplete="off"
@@ -730,22 +797,18 @@ class HomePage extends React.Component {
   }
 }
 
-export default HomePage;
+//export default HomePage;
 
-// function mapStateToProps(state) {
-//   console.log("in map state details view",state);
-// //  return { property_detail: state.fetch_details_view.property_detail,
-// //  };
-// }
+function mapStateToProps(state) {
+  console.log("in map state details view123",state);
+  return {
+   LoginReducer: state.LoginReducer
+  }
+//  return { property_detail: state.fetch_details_view.property_detail,
+//  };
+}
 
-// const mapDispachToProps = dispatch => {
-//   return {
-//    //   fetch_detailsview: (id) => dispatch(fetch_detailsview(id)),
+export default connect(
+  mapStateToProps
+)(HomePage);
 
-//   };
-// };
-
-// export default connect(
-//   mapStateToProps,
-//   mapDispachToProps
-// )(Jobs);

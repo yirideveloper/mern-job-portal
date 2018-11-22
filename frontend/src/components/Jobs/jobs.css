@@ -169,12 +169,6 @@ padding : 10px
     padding-bottom: 2%;
 
 }
-.heading-company3{
-    font-family:'Lato','Roboto','Arial','Helvetica Neue',Helvetica,sans-serif;
-    font-size: 18px;
-    padding-bottom: 2%
-
-}
 
 .heading-location{
     font-family:'Lato','Roboto','Arial','Helvetica Neue',Helvetica,sans-serif;
@@ -184,24 +178,6 @@ padding : 10px
     ;
 
 }
-.heading-location3{
-    font-family:'Lato','Roboto','Arial','Helvetica Neue',Helvetica,sans-serif;
-    font-size: 14px;
-    padding-bottom: 1%;
-    padding-top: .5%;
-    color: rgba(0, 0, 0, 0.6);
-    ;
-
-}
-.heading-location4{
-    font-family:'Lato','Roboto','Arial','Helvetica Neue',Helvetica,sans-serif;
-    font-size: 14px;
-    padding-bottom: 2%;
-    color:black;
-    font-weight: 600;
-
-}
-
 .heading-location-button{
     font-family:'Lato','Roboto','Arial','Helvetica Neue',Helvetica,sans-serif;
     font-size: 16px;
@@ -354,9 +330,4 @@ padding : 10px
     left: 0;
     top: 0;
     opacity: 0;
-  }
-
-  .activeCard {
-      background: rgba(152, 216, 244, 0.25)
-
   }

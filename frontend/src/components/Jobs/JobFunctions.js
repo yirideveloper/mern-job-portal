@@ -9,24 +9,13 @@ constructor(props){
     super(props)
 
     this.state={
-        industry:"",
+        industry:"Information Technology & Services",
         type:"Full-time",
         function:"Information Technology"
 
     }
 
 }
-
-componentWillReceiveProps(nextProps){
-    
- this.setState({
-     industry:nextProps.industry,
-     type:nextProps.type,
-     function:nextProps.jobFunction
-         
-     }
- )
-  }
   render() {
       
     return (
