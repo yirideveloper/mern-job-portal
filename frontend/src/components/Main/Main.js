@@ -17,6 +17,7 @@ import Message from "../Message/Message";
 import CompanyPage from "../Jobs/CompanyPage";
 import JobSaved from "../Jobs/JobSaved";
 
+
 class Main extends Component {
   render() {
     console.log(APPLICANT_LOGIN_ROUTE);
