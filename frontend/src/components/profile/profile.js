@@ -10,8 +10,6 @@ import { connect } from "react-redux";
 import { api , printError, printMessage} from '../../services/';
 import fetchProfile from '../../actions/profile';
 import * as moment from 'moment';
-import PLACES from '../Common/Places';
-
 
 window.delrows =  function(f){
     document.querySelector("#skillstable tr[data-dellength='"+(f)+"']").remove();
@@ -41,7 +39,7 @@ class profile extends Component {
             'skills' : [],
             'summary': '',
             'createdAt': '', 
-            'updatedAt' : '',
+            'updatedAt' : ''
         }
 
 
@@ -299,6 +297,7 @@ class profile extends Component {
               console.error('Error', error)
           });
     };
+
 
     getDiffBetweenDates(d1 , d2)
     {
@@ -731,7 +730,7 @@ class profile extends Component {
             console.log(fd);
             
             try {
-                let ret = await api('POST','/document/upload',fd,{'Content-Type': 'multipart/form-data'});
+                let ret = await api('POST','/document',fd,{'Content-Type': 'multipart/form-data'});
                 console.log(ret);
                 if(ret.status>=200 && ret.status<300)
                 {
@@ -1015,16 +1014,11 @@ class profile extends Component {
                                                                     
                                                                     <img src="http://via.placeholder.com/35x35" alt="" />
                                                                     <div className="sgt-text">
-                                                                         <div className="exp-company">
-                                                                            {this.state.firstname} {this.state.lastname}
-
-                                                                         </div>
-                                                                         <div className="exp-company">
-                                                                            {this.state.address.street} <br/>{this.state.city}<br/>
-                                                                            {this.state.country}<br/>
-                                                                            {this.state.zipcode}
-                                                                         </div>
-                                                                        
+                                                                        <h4>
+                                                                            Jessica William
+                                                                           
+                                                                        </h4>
+                                                                        <span>Graphic Designer</span>
                                                                     </div>
                                                                     
                                                                 </div>
@@ -1152,9 +1146,8 @@ class profile extends Component {
                                                                     </table><br />
 
                                                                     <label id="work-exp-form"> HeadLine</label><input type="text" className="form-control"></input><br />
-                                                                    <label id="work-exp-form"> Location </label><PLACES ></PLACES><br />
+                                                                    <label id="work-exp-form"> Location </label><input type="text" className="form-control"></input><br />
                                                                     <label id="work-exp-form"> Description </label><input type="textarea" className="form-control"></input><br />
-                                                                    
 
 
                                                                 </form>
@@ -1299,15 +1292,15 @@ class profile extends Component {
                                                                                             })}
                                                                                             />
                                                                                             <div className="autocomplete-dropdown-container">
-                                                                                            
+                                                                                            {loading && <div>Loading...</div>}
                                                                                             {suggestions.map(suggestion => {
                                                                                                 const className = suggestion.active
                                                                                                 ? 'suggestion-item--active'
                                                                                                 : 'suggestion-item';
                                                                                                 // inline style for demonstration purpose
                                                                                                 const style = suggestion.active
-                                                                                                ? { backgroundColor: '#fafafa', cursor: 'pointer' , padding : '10px'}
-                                                                                                : { backgroundColor: '#ffffff', cursor: 'pointer',  padding : '10px' };
+                                                                                                ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                                                                                                : { backgroundColor: '#ffffff', cursor: 'pointer' };
                                                                                                 return (
                                                                                                 <div
                                                                                                     {...getSuggestionItemProps(suggestion, {
