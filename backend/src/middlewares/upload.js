@@ -5,9 +5,10 @@ const uuidv4 = require('uuid/v4')
 const path = require('path')
 const config = require('./../config')
 
-aws.config.update(config.awsaccess)
+aws.config.update(config)
 
 var s3 = new aws.S3()
+
 var upload = multer({
   storage: multerS3({
     s3: s3,
