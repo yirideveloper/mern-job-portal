@@ -3,7 +3,7 @@
 import axios from 'axios';
 import {BASE_URL}  from '../constants/';
 
-export async function api(type, url , data = {},headers = {}) {
+export async function api(type, url , data = {}) {
     if(url[0]!='/')
         url = '/' + url;
     url = BASE_URL + url;
@@ -11,8 +11,6 @@ export async function api(type, url , data = {},headers = {}) {
     console.log(url);
     console.log(data);
     let tokenValue = sessionStorage.getItem('user_token');
-    let headersObject = Object.assign({},{ 'Authorization': 'Bearer ' + tokenValue},headers);
-    
     let sendToken; 
     if(tokenValue!==null) sendToken = true; else sendToken = false;
     if( type == 'GET' || type=='get')
@@ -20,7 +18,10 @@ export async function api(type, url , data = {},headers = {}) {
         if(sendToken)
         {
             const res = await axios.get(url , {
-                    headers: headersObject
+                    headers: 
+                    { 
+                        'Authorization': 'Bearer ' + tokenValue
+                    }
                 });
             return res;
         }
@@ -39,7 +40,10 @@ export async function api(type, url , data = {},headers = {}) {
                 method: 'POST',
                 data : data,
                 url: url,
-                headers: headersObject
+                headers: 
+                    { 
+                        'Authorization': 'Bearer ' + tokenValue
+                    }
             });
             return res;
         }
@@ -55,25 +59,14 @@ export async function api(type, url , data = {},headers = {}) {
     }
     else if( type == 'PUT' || type=='put')
     {
-        if(sendToken)
-        {
-            const res = await axios({
-                method: 'PUT',
-                data : data,
-                url: url,
-                headers: headersObject
-            });
-            return res;
-        }
-        else 
-        {
-            const res = await axios({
-                method: 'PUT',
-                data : data,
-                url: url
-            });
-            return res;
-        }
+        //TODO
+        /* const res = await axios({
+            method: 'PUT',
+            data : data,
+            url: BASE_URL + url,
+            headers: { 'Authorization': authstring}
+        });
+        return await res; */
     }
     else if( type == 'PATCH' || type=='patch')
     {
