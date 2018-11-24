@@ -59,28 +59,14 @@ export async function api(type, url , data = {}) {
     }
     else if( type == 'PUT' || type=='put')
     {
-        if(sendToken)
-        {
-            const res = await axios({
-                method: 'PUT',
-                data : data,
-                url: url,
-                headers: 
-                    { 
-                        'Authorization': 'Bearer ' + tokenValue
-                    }
-            });
-            return res;
-        }
-        else 
-        {
-            const res = await axios({
-                method: 'PUT',
-                data : data,
-                url: url
-            });
-            return res;
-        }
+        //TODO
+        /* const res = await axios({
+            method: 'PUT',
+            data : data,
+            url: BASE_URL + url,
+            headers: { 'Authorization': authstring}
+        });
+        return await res; */
     }
     else if( type == 'PATCH' || type=='patch')
     {
