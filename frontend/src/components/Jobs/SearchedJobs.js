@@ -7,6 +7,7 @@ import JobSkills from "./JobSkills";
 import get_filtered_jobs from "../../actions/SearchedJobs";
 import {connect} from "react-redux";
 import {set_active_id} from "../../actions/jobCardActiveId";
+
 import "./jobs.css";
 
 
@@ -24,7 +25,7 @@ class SearchedJobs extends Component {
   }
 componentDidMount(){
     //axios post http://localhost:3000/api/search/jobs
-  
+
    var data={
     "company" : "facebook",
     "title": "Software Developer",
@@ -39,7 +40,6 @@ componentDidMount(){
   }
 
   componentWillReceiveProps(nextProps){
-   
     this.updateActiveID(nextProps.activeID);
   }
 
