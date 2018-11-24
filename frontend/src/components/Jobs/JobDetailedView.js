@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
 import {set_active_id} from "../../actions/jobCardActiveId";
-import { api , printError, printMessage} from '../../services/';
 
 import "./jobs.css";
 import JobSkills from "./JobSkills";
@@ -32,39 +31,13 @@ class JobDetailedView extends Component {
       industry:"",
       type:"",
       jobFunction:"",
-      recruiter_id:"",
-      job_id:"",
-      time_diff:""
+      recruiter_id:""
+      
 
 
     }
-    this.saveJob=this.saveJob.bind(this);
   }
   
- async saveJob(){
-     console.log("JOB ID",this.state.job_id);
-    try {
-        let ret = await api('GET','/jobs/'+this.state.job_id+'/save');
-        console.log("ttt",ret);
-        if(ret.status===200)
-        {
-            printMessage("Success! This job is successfully saved");
-            
-        }
-        else 
-        {
-            throw "error";
-        }
-      } 
-      catch (error) 
-      {
-        console.log("ERROR in SAVE",error);
-        console.log(Object.keys(error), error.response);
-        printError(error);
-      }
-        
-  }
-
   setActiveID(id){
     this.props.set_active_id(id);
   }
@@ -95,10 +68,7 @@ if(filteredJob!=null){
     skills:filteredJob.skills,
     easyapply:filteredJob.easy_apply,
     jobFunction:filteredJob.function,
-    recruiter_id:filteredJob.recruiter,
-    job_id:filteredJob._id,
-    time_diff:filteredJob.time_diff
-
+    recruiter_id:filteredJob.recruiter
     })
 }else{
     return;
@@ -109,14 +79,6 @@ if(filteredJob!=null){
   render() {
     let activeJob=null;
 console.log("Render RCID",this.state.recruiter_id);
-let easyApplyButton=null;
-
-if(this.state.easyapply){
-    easyApplyButton=<div class='child inline-block-child'><button type="button" className="btn easy-apply" data-toggle="modal" data-target="#easyApplyModal">Easy Apply</button></div>
-
-}else{
-    easyApplyButton=<div class='child inline-block-child'><button type="button" className="btn easy-apply">Apply</button></div>
-}
     return (
       <div>
       <div className="row left-job-detail">
@@ -200,15 +162,15 @@ if(this.state.easyapply){
               </div>
               
               <div className="heading-location">
-              <label style={{color:"green",fontSize:"12px"}}>New &#9670;</label>&nbsp;<label style={{fontSize:"12px"}}>Posted {this.state.time_diff} ago</label>
+              <label style={{color:"green",fontSize:"12px"}}>New &#9670;</label>&nbsp;<label style={{fontSize:"12px"}}>Posted 1 hour ago</label>
               </div>
               <div className="heading-location-button">
               <img src={Watch} style={{width:"4%"}}></img>&nbsp;<label style={{paddingTop:"1%",fontSize:"12px"}}>Be an early applicant</label>
               </div>
               <div className="heading-location-button">
               <div class='parent' >
-              <div class='child inline-block-child' style={{paddingRight:"20px"}}><button type="button" class="btn btn-outline-primary" style={{fontWeight:"bold"}} onClick={this.saveJob}>Save</button></div>
-              {easyApplyButton}
+              <div class='child inline-block-child' style={{paddingRight:"20px"}}><button type="button" class="btn btn-outline-primary" style={{fontWeight:"bold"}}>Save</button></div>
+              <div class='child inline-block-child'><button type="button" className="btn easy-apply" data-toggle="modal" data-target="#easyApplyModal">Easy Apply</button></div>
             </div>
             </div>
             
