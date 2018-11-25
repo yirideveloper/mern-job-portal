@@ -22,8 +22,8 @@ padding : 10px
     padding-top: 0px;
     box-shadow: 0 0 0 1px rgba(0,0,0,.15), 0 2px 3px rgba(0,0,0,.2);
 }
-.searchButton button{
-    width : 100%;
+.searchButton{
+
 }
 
 .appliedjobs{
@@ -359,12 +359,4 @@ padding : 10px
   .activeCard {
       background: rgba(152, 216, 244, 0.25)
 
-  }
-
-  .autocomplete-dropdown-container
-  {
-    position: absolute;
-    top: 40px;
-    width: 95%;
-    z-index: 1111111111;
   }
