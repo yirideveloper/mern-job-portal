@@ -75,18 +75,19 @@ class profile extends Component {
         let u = this;
         try
         {
-            if(u.props.user_profile)
+            if(this.props.user_profile)
             {
-                let userdata = u.props.user_profile.user_profile.user;
+                let usertype = this.props.user_profile.user_profile.role;
+                let userdata = this.props.user_profile.user_profile.user;
                 console.log(moment(userdata['createdAt']));
                 console.log(userdata);
                 if(userdata['banner_image']=='')
                 {
                     userdata['banner_image'] = bannerlogo;
                 }
-                if(userdata['userimage']=='')
+                if(userdata['profile']=='')
                 {
-                    userdata['userimage'] = profileplaceholder;
+                    userdata['profile'] = profileplaceholder;
                 }
                 u.setState({
                     firstname : userdata['name']['first'],
@@ -97,7 +98,7 @@ class profile extends Component {
                     country : userdata['address']['country'],
                     zipcode : userdata['address']['zipcode'],
                     banner : userdata['banner_image'],
-                    userimage : userdata['profile_image'],
+                    profile : userdata['profile_image'],
                     education : userdata['education'],
                     experience : userdata['experience'],
                     resume : userdata['resume'],
