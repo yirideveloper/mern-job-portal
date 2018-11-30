@@ -30,9 +30,6 @@ const applicantSchema = new Schema({
   skills: {
     type: [String]
   },
-  headline: {
-    type: String
-  },
   summary: {
     type: String
   },

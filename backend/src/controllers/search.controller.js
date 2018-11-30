@@ -57,7 +57,6 @@ exports.getFilteredJobs = async (req, res, next) => {
     const response = { payLoad: [] }
     const title = req.body.title ? req.body.title : null
     const company = req.body.company ? req.body.company : null
-    const skills = req.body.skills ? req.body.skills : []
     let lat = null
     let long = null
     if (req.body.coordinates) {
@@ -68,20 +67,14 @@ exports.getFilteredJobs = async (req, res, next) => {
     for (let index = 0; index < job.length; index++) {
       const element = job[index]
       let passesCriteria = true
-      if (lat && long && passesCriteria) {
+      if (lat && long) {
         passesCriteria = distance(lat, long, element.address.coordinates.latitude, element.address.coordinates.longitude) < 50
       }
-      if (title && element.title && passesCriteria) {
+      if (title && element.title) {
         passesCriteria = element.title.toLowerCase().includes(title.toLowerCase())
       }
-      if (company && element.company && passesCriteria) {
+      if (company && element.company) {
         passesCriteria = element.company.toLowerCase().includes(company.toLowerCase())
-      }
-      if (skills.length > 0 && element.skills && passesCriteria) {
-        passesCriteria = false
-        skills.forEach(skill => {
-          if (element.skills.includes(skill)) passesCriteria = true
-        })
       }
       if (passesCriteria) {
         response.payLoad.push(element)
