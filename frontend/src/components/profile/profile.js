@@ -103,35 +103,6 @@ class profile extends Component {
                         'zipcode' : ''
                     }
                 }
-                if(Object.keys(userdata).indexOf("education")==-1)
-                {
-                    userdata['education'] = [];
-                }
-                if(Object.keys(userdata).indexOf("experience")==-1)
-                {
-                    userdata['experience'] = [];
-                }
-                if(Object.keys(userdata).indexOf("resume")==-1)
-                {
-                    userdata['resume'] = '';
-                }
-                if(Object.keys(userdata).indexOf("skills")==-1)
-                {
-                    userdata['skills'] = [];
-                }
-                if(Object.keys(userdata).indexOf("summary")==-1)
-                {
-                    userdata['summary'] = '';
-                }
-                if(Object.keys(userdata).indexOf("address")==-1)
-                {
-                    userdata['address'] = {
-                        'city' : '',
-                        'street' : '',
-                        'country' : '',
-                        'zipcode' : ''
-                    }
-                }
                 
 
                 u.setState({
@@ -1209,7 +1180,7 @@ class profile extends Component {
                         
                                                     <div className="col-lg-3 right-sidebar">
                                                         <div >
-                                                            <a href={`/public-profile/${this.state.publicid}`}  className="view-public save-button">View Public Page</a>
+                                                            <a href="javascript:void(0)" className="view-public save-button"><Link to={`/public-profile/${this.state.publicid}`} target="_blank" >View Public Page</Link> </a>
                                                         </div>
                                                         <div className="widget widget-portfolio">
                                                             <div className="wd-heady">

@@ -11,7 +11,7 @@ import { api , printError, printMessage} from '../../services/';
 import fetchProfile from '../../actions/profile';
 import * as moment from 'moment';
 import PLACES from '../Common/Places';
-import { Link } from 'react-router-dom';
+
 
 
 class PublicProfile extends Component {
@@ -44,7 +44,6 @@ class PublicProfile extends Component {
     
             this.getDetails =  this.getDetails.bind(this);
             this.getDiffBetweenDates = this.getDiffBetweenDates.bind(this);
-            this.connectMessage = this.connectMessage.bind(this);
         }
 
 
@@ -92,27 +91,7 @@ class PublicProfile extends Component {
                                 'zipcode' : ''
                             }
                         }
-                        if(Object.keys(userdata).indexOf("education")==-1)
-                        {
-                            userdata['education'] = [];
-                        }
-                        if(Object.keys(userdata).indexOf("experience")==-1)
-                        {
-                            userdata['experience'] = [];
-                        }
-                        if(Object.keys(userdata).indexOf("resume")==-1)
-                        {
-                            userdata['resume'] = '';
-                        }
-                        if(Object.keys(userdata).indexOf("skills")==-1)
-                        {
-                            userdata['skills'] = [];
-                        }
-                        if(Object.keys(userdata).indexOf("summary")==-1)
-                        {
-                            userdata['summary'] = '';
-                        }
-                       
+                
                         this.setState({
                             firstname : userdata['name']['first'],
                             lastname : userdata['name']['last'],
@@ -165,32 +144,6 @@ class PublicProfile extends Component {
         {
             return (months + ' months');
         }
-    }
-
-    async connectMessage()
-    {
-        console.log("test");
-        
-        try 
-            {
-                let paramsid = this.props.match.params.id;
-                console.log(paramsid);
-                let data = {
-                    "to": paramsid
-                };
-                let ret = await api('POST','/message/',data);
-                console.log(ret);
-                if(ret.status>=200 && ret.status<300)
-                {
-                    this.props.history.push('/message');
-                }
-
-            } 
-            catch (error) 
-            {
-                console.log(error); 
-                printError(error);
-            }
     }
         
         
@@ -466,14 +419,7 @@ class PublicProfile extends Component {
                     </div>
                     
                                                 <div className="col-lg-3 right-sidebar">
-                                                    <div >
-                                                        <a href="javascript:void(0)" className="view-public save-button"><Link to={`/public-profile/${this.state.publicid}`} target="_blank" >Connect </Link> </a>
-                                                    </div>
-                                                    <div onClick={this.connectMessage}>
-                                                        <a href="javascript:void(0)" className="view-public save-button">
-                                                            Message 
-                                                        </a>
-                                                    </div>
+                                                    
                                                     <div className="widget widget-portfolio">
                                                         <div className="wd-heady">
                                                             <h3>Portfolio</h3>
