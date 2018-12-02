@@ -1209,7 +1209,7 @@ class profile extends Component {
                         
                                                     <div className="col-lg-3 right-sidebar">
                                                         <div >
-                                                            <a href={`/public-profile/${this.state.publicid}`}  className="view-public save-button">View Public Page</a>
+                                                            <a href="javascript:void(0)" className="view-public save-button"><Link to={`/public-profile/${this.state.publicid}`} target="_blank" >View Public Page</Link> </a>
                                                         </div>
                                                         <div className="widget widget-portfolio">
                                                             <div className="wd-heady">
