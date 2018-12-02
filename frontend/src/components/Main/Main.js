@@ -19,8 +19,8 @@ import JobSaved from "../Jobs/JobSaved";
 import SavedJobsHome from "../Jobs/SavedJobsHome";
 import JobsBySkill from "../Jobs/JobsBySkill";
 import PublicProfile from "../profile/publicprofile";
+import ApplicantHome from "../Home/ApplicantHome";
 
-import ListedJobs from "../recruiter/listedJobs";
 class Main extends Component {
   render() {
     console.log(APPLICANT_LOGIN_ROUTE);
@@ -31,8 +31,7 @@ class Main extends Component {
                 <Route path="/recruiter" component={RecruiterDashboard} exact/>
                 <Route path="/jobshome" component={JobsHome} exact />
                 <Route path="/jobdetailedview" component={JobDetailedView} exact />
-                <Route path="/postedjobs" component={ListedJobs} exact />
-
+                
                 <Route path="/profile" component={Profile} exact />
                 <Route path="/message" component={Message} exact />
                 <Route path="/companypage" component={CompanyPage} exact />
@@ -40,6 +39,8 @@ class Main extends Component {
                 <Route path="/searchedjobs/:title/:location" component={SearchedJobs} exact />
                 <Route path="/jobsbyskill" component={JobsBySkill} exact />
                 <Route path="/public-profile/:id" component={PublicProfile} exact />
+                <Route path="/applicanthome" component={ApplicantHome} exact />
+
 
 
 
