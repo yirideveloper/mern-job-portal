@@ -12,28 +12,21 @@ class PostedJob extends Component {
         super(props);
 
         this.state = {
-            title: this.props.data.title,
-            address: this.props.data.address,
-            easyApply: this.props.data.easy_apply,
+            title: "",
+            address: "",
+            easyApply: "",
             applicant_resume_name: "",
-            job_id: this.props.data._id,
-            application_count:this.props.data.application_count,
-            save_count:this.props.data.save_count,
-            createdAt:this.props.data.createdAt,
-            updatedAt:this.props.data.updatedAt,
-            city:"",
-            country:""
+            job_id: ""
         }
 
 
     }
 
-   
-    
 
     render() {
-       
-console.log('address',this.state.address);
+        let easyApplyButton = null;
+
+
         return (
             <div id="card11">
                 <div className="container py-1">
@@ -46,10 +39,10 @@ console.log('address',this.state.address);
                             </div>
                             <div className="col-md-9">
                                 <div id="cb" className="card-block">
-                                    <h3 id="card-heading-saved" className="card-title"><Link id="jobsavedheading" to="">{this.state.title}</Link></h3>
+                                    <h3 id="card-heading-saved" className="card-title"><Link id="jobsavedheading" to="">Software Engineering Intern - Machine Learning</Link></h3>
                                     <div className="row">
                                         <div className="col-md-7" style={{ paddingLeft: "0px"}}>
-                                            <p id="propdetails1">{this.state.city},{this.state.country}</p>
+                                            <p id="propdetails1">San Jose ,CA</p>
                                             <p id="propdetails" className="card-text" style={{ paddingTop: "0px" }}>San Jose ,CA</p>
 
                                         </div>
@@ -57,12 +50,12 @@ console.log('address',this.state.address);
                                         
                                         
                                             <div className="col-md-2">
-                                            <span className="bluetext"> {this.state.application_count} </span>
+                                            <span className="bluetext"> 21 </span>
                                             <span className ="lightgreytext"> Appications</span>
                                         </div>
                         
                                         <div className="col-md-2">
-                                            <span className="bluetext"> {this.state.save_count} </span>
+                                            <span className="bluetext"> 10 </span>
                                             <span className ="lightgreytext"> Bookmarks</span>               
                                         </div> 
                                         <div style={{paddingBottom:"10%"}}>
@@ -75,7 +68,7 @@ console.log('address',this.state.address);
                             
                         </div>
                         <div style={{paddingLeft:"66%",paddingBottom:"2%"}}>
-                        <span className="JobDate"> Created At :</span> <label>{this.state.createdAt}</label><span className="JobDate" style={{paddingLeft:"4%"}}> Updated at :</span><label>{this.state.updatedAt}</label>
+                        <span className="JobDate"> Created At :</span> <label>25th Jan 2018</label><span className="JobDate" style={{paddingLeft:"4%"}}> Updated at :</span><label> 30th Jan 2018</label>
                         </div>
                        
 
