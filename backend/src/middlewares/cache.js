@@ -7,7 +7,7 @@ const cache = (req, res, next) => {
 
   console.log("In Redis cache");
   const response = {payLoad: []}
-  const criterion = req.body.criterion ? req.body.criterion : " "
+  const criterion = req.body.criterion ? req.body.criterion : null
   let lat = null
   let long = null
   if (req.body.coordinates) {
