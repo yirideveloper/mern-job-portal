@@ -3,7 +3,6 @@ import { IMAGE_PATHS } from "../../constants/routes";
 import { Link } from "react-router-dom";
 import "./PostJobHeader.css";
 import jobslogo from "../Files/Images/jobslogo.png";
-
 class PostJobHeader extends Component {
   render() {
     return (
@@ -12,20 +11,24 @@ class PostJobHeader extends Component {
           <div class="collapse navbar-collapse" id="navbarText">
             <li>
               {" "}
-             <Link to="/recruiterhome">  
-             <img src={jobslogo} class="logocrop" alt="no pic" />
-             </Link> 
+              <img src={jobslogo} class="logocrop" alt="no pic" />{" "}
             </li>
 
             <ul class="navbar-nav mr-auto liststyle">
               <li class="nav-item active">
                 <a class="nav-link links" href="#">
-                  <Link to="/recruiterhome">Home</Link>
+                  HOME{" "}
                 </a>
               </li>
               <li class="nav-item">
                 <a class="nav-link links" href="#">
-                <Link to="/postjob">Post a Job</Link>
+                  POST A JOB
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link links" href="#">
+                  {" "}
+                  LINKEDIN.COM
                 </a>
               </li>
             </ul>
