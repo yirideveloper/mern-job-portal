@@ -46,14 +46,6 @@ recruiterSchema.method({
       transformed[field] = this[field]
     })
     return transformed
-  },
-  identityTransform () {
-    const transformed = {}
-    const fields = ['id', 'name', 'profile_image']
-    fields.forEach((field) => {
-      transformed[field] = this[field]
-    })
-    return transformed
   }
 })
 
