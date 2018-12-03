@@ -5,8 +5,6 @@ import { api, printError, printMessage } from '../../services';
 import Suggestions from './suggestions';
 import Connections from './connections';
 import RecommendedJobs from './recommendJobs';
-
-
 // import "./Home.css"
 import {Link} from 'react-router-dom';
 
@@ -21,8 +19,7 @@ class ApplicantHome extends Component {
 			fname:"",
 			lname:"",
 			mutualConnections:[],
-			recommended_jobs  : [],
-			user_profile_image:""
+			recommended_jobs  : []
 
 		}
 	}
@@ -34,9 +31,8 @@ async componentDidMount(){
         console.log("user",user);
         this.setState({
 		  fname:user.data.payLoad.user.name.first,
-		  lname:user.data.payLoad.user.name.last,
-		  user_profile_image:user.data.payLoad.user.profile_image
-			
+		  lname:user.data.payLoad.user.name.last
+          
         })
       } catch (error) {
         console.log(Object.keys(error), error.response);
@@ -58,7 +54,7 @@ async componentDidMount(){
 		  connections:ret.data.payLoad.connections,
 		  totalConnections:ret.data.payLoad.totalConnections,
 		  //for now used connections instead of mutual
-		  mutualConnections:mutual.data.payLoad.connections,
+		  mutualConnections:ret.data.payLoad.connections,
 		  recommended_jobs:recommendation.data.payLoad
           
 		})
@@ -87,7 +83,7 @@ async componentDidMount(){
         )
 	})
 	let jobs=null;
-      jobs =this.state.recommended_jobs.map(job => {
+      jobs =this.state.recommended_jobs.slice(0, 10).map(job => {
 		
         return(
             <RecommendedJobs data={job}/>
@@ -109,7 +105,7 @@ async componentDidMount(){
 										<div class="user-profile">
 											<div class="username-dt">
 												<div class="usr-pic">
-													<img src={this.state.user_profile_image} alt="" />
+													<img src="http://via.placeholder.com/100x100" alt="" />
 												</div>
 											</div>
 											<div class="user-specs">
@@ -128,6 +124,42 @@ async componentDidMount(){
 										</ul>
 									</div>
 
+									<div class="suggestions full-width">
+										<div class="sd-title">
+											<h3>Suggestions</h3>
+											<i class="la la-ellipsis-v"></i>
+										</div>
+										<div class="suggestions-list">
+											<div class="suggestion-usd">
+												<img src="http://via.placeholder.com/35x35" alt="" />
+												<div class="sgt-text">
+													<h4>Jessica William</h4>
+													<span>Graphic Designer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+											<div class="suggestion-usd">
+												<img src="http://via.placeholder.com/35x35" alt="" />
+												<div class="sgt-text">
+													<h4>John Doe</h4>
+													<span>PHP Developer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+								
+											<div class="suggestion-usd">
+												<img src="http://via.placeholder.com/35x35" alt="" />
+												<div class="sgt-text">
+													<h4>John Doe</h4>
+													<span>PHP Developer</span>
+												</div>
+												<span><i class="la la-plus"></i></span>
+											</div>
+											<div class="view-more">
+												<a href="#" title="">View More</a>
+											</div>
+										</div>
+									</div>
                                 </div>
                             </div>
 
@@ -176,7 +208,7 @@ async componentDidMount(){
 
                             <div className="col-lg-3 pd-right-none no-pd" style ={{backgroundColor: "white",border: "1px solid darkgrey"}}>
                             <div className="sd-title1">
-											<h3 style={{"fontWeight":"bold"}}>Jobs you may like</h3>
+											<h3>Jobs you may like</h3>
 											<i class="la la-ellipsis-v"></i>
 										</div>
                                
