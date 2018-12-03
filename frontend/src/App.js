@@ -1,16 +1,13 @@
-import React, { Component } from "react";
-import "./App.css";
-
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.min";
-// import "../node_modules/font-awesome/css/font-awesome.min.css";
-
-import "bootstrap";
+import React, { Component } from 'react';
+import './App.css';
+import 'bootstrap';
 
 import store from "./store/store";
 import { BrowserRouter } from "react-router-dom";
 import Main from "./components/Main/Main";
 import { Provider } from "react-redux";
+
+
 
 import StateLoader from "./store/store-actions";
 
@@ -20,6 +17,7 @@ store.subscribe(() => {
     stateLoader.saveState(store.getState());
 });
 
+
 class App extends Component {
   render() {
     return (
@@ -28,7 +26,7 @@ class App extends Component {
           <BrowserRouter>
             <div>
               <Main />
-              <div className="err_box err_box_hidden" />
+              <div className="err_box err_box_hidden"></div>
             </div>
           </BrowserRouter>
         </div>
@@ -36,5 +34,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;
