@@ -39,21 +39,7 @@ class Header extends Component {
 
   componentDidMount()
   {
-		/******CHECK FOR APPLICANT LOGIN *********/
 
-		let user = sessionStorage.getItem('user_id');
-		let profile = sessionStorage.getItem('user_id');
-		let user_token = sessionStorage.getItem('user_id');
-		if(profile != 'recruiter')
-		{
-			if(!user || !user_token)
-			{
-				this.props.history.push("/");
-			}
-		}
-
-
-		/*****************************************/
 		this.props.dispatch(fetchProfile());
   }
 
