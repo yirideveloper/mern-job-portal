@@ -40,8 +40,6 @@ class PublicProfile extends Component {
                 'summary': '',
                 'createdAt': '', 
                 'updatedAt' : '',
-                 recommended_jobs : []
-                
             }
     
             this.getDetails =  this.getDetails.bind(this);
@@ -50,22 +48,8 @@ class PublicProfile extends Component {
         }
 
 
-        async componentDidMount()
+        componentDidMount()
         {
-            if(sessionStorage.getItem('user_id')){
-                try {
-                    let recommendation = await api("GET",`/jobs/recommendation`);
-                    
-                    this.setState({
-                      recommended_jobs:recommendation.data.payLoad
-                    })
-                  } catch (error) {
-                    console.log(Object.keys(error), error.response);
-                    printError(error);
-                  }
-                }else{
-                    return;
-                }
             this.getDetails();
         }
 
@@ -212,24 +196,6 @@ class PublicProfile extends Component {
         
     render()
     {
-        var rec_jobs = this.state.recommended_jobs.map((jobs)=>{
-            console.log(jobs)
-         return(<div>
-             <div className="row">
-                  <div className="col-md-3">
-                      <img src="" class="img-fluid job-card-image" alt="" />
-                  </div>
-                  <div className="col-md-7">
-                      <p style={{fontSize : "15px"}}>{jobs.title}</p>
-                      <p style={{fontSize : "14px"}}>{jobs.function}</p>
-                      <p style={{fontSize : "12px"}}>{jobs.type}</p>
-
-                  </div>
-           </div>
-      <hr/>
-      </div>);
-        })
-
     return (
         <div>
             <Header />
@@ -508,15 +474,28 @@ class PublicProfile extends Component {
                                                             Message 
                                                         </a>
                                                     </div>
-                                                    <p style={{fontSize : "20px", color : "black", textAlign : "center"}}>
-                                                            Jobs you may like 
-                                                        </p>
-                                                        <hr></hr>
-                                                        <div style={{height:"auto", backgroundColor:"#FFF", marginTop:"-5px", paddingTop: "10px"}}>
-                                                        {rec_jobs}
-                                                    </div>
-
-                                                   
+                                                    <div className="widget widget-portfolio">
+                                                        <div className="wd-heady">
+                                                            <h3>Portfolio</h3>
+                                                            <img src="images/photo-icon.png" alt="" />
+                                                        </div>
+                                                        <div className="pf-gallery">
+                                                            <ul>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                                <li><a href="javascript:void(0)" title=""><img src="http://via.placeholder.com/70x70" alt="" /></a></li>
+                                                            </ul>
+                                                        </div>{ /* <!--pf-gallery end--> */}
+                                                    </div>{ /* <!--widget-portfolio end--> */}
                                                 </div>{ /* <!--right-sidebar end--> */}
                                             
                     
@@ -547,6 +526,3 @@ class PublicProfile extends Component {
 }
 
 export default PublicProfile;
-
-
-
