@@ -18,7 +18,7 @@ const addressSchema = new Schema({
     type: String
   },
   zipcode: {
-    type: String
+    type: Number
   },
   coordinates: {
     type: coordinates.schema
