@@ -12,8 +12,8 @@ constructor(props){
 this.state={
     title:this.props.data.title,
     function:this.props.data.function,
-    type:this.props.data.type,
-    company_logo:this.props.data.company_logo
+    type:this.props.data.type
+   
 }
 }
   render() {
@@ -21,7 +21,7 @@ this.state={
     <div>
            <div className="row">
                 <div className="col-md-3">
-                    <img src={this.state.company_logo} class="img-fluid job-card-image" alt="" />
+                    <img src="" class="img-fluid job-card-image" alt="" />
                 </div>
                 <div className="col-md-7">
                     {this.state.title} {this.state.function}
