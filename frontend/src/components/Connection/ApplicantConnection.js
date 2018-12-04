@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
-import Header from "../Common/Header"
+import Header from "../Common/Header";
+import RecruiterHeader from "../Common/RecruiterHeader";
 import JobsByskill from "../Jobs/JobsBySkill";
 import { api, printError, printMessage } from '../../services';
 import Suggestions from './suggestions';
 import Connections from './connections';
 import RecommendedJobs from './recommendJobs';
+
+
 // import "./Home.css"
 import {Link} from 'react-router-dom';
 
@@ -19,7 +22,9 @@ class ApplicantHome extends Component {
 			fname:"",
 			lname:"",
 			mutualConnections:[],
-			recommended_jobs  : []
+			recommended_jobs  : [],
+			headline :"",
+			user_profile_image:""
 
 		}
 	}
@@ -31,8 +36,10 @@ async componentDidMount(){
         console.log("user",user);
         this.setState({
 		  fname:user.data.payLoad.user.name.first,
-		  lname:user.data.payLoad.user.name.last
-          
+		  lname:user.data.payLoad.user.name.last,
+		  headline : user.data.payLoad.user.headline,
+		  user_profile_image:user.data.payLoad.user.profile_image
+			
         })
       } catch (error) {
         console.log(Object.keys(error), error.response);
@@ -46,7 +53,8 @@ async componentDidMount(){
 	try {
 		let ret = await api('GET','/users/'+sessionStorage.getItem('user_id')+'/connections');
 		let mutual=await api('GET','/users/'+sessionStorage.getItem('user_id')+'/mutual');
-		let recommendation = await api("GET",`/jobs/recommendation`);
+		//let recommendation ;
+		//= await api("GET",`/jobs/recommendation`);
         
 		console.log("connections",ret);
 		console.log("mutual",mutual);
@@ -55,7 +63,7 @@ async componentDidMount(){
 		  totalConnections:ret.data.payLoad.totalConnections,
 		  //for now used connections instead of mutual
 		  mutualConnections:ret.data.payLoad.connections,
-		  recommended_jobs:recommendation.data.payLoad
+		 // recommended_jobs:recommendation.data.payLoad
           
 		})
       } catch (error) {
@@ -67,6 +75,18 @@ async componentDidMount(){
 	}
 }
   render() {
+	var check = sessionStorage.getItem("profile");
+    console.log(check)
+    let x = "";
+    if (check == "applicant") {
+    console.log(check)
+
+      x = <Header />;
+    } else if (check == "recruiter") {
+    console.log(check)
+
+      x = <RecruiterHeader />;
+    }
 
 	let suggestions=null;
       suggestions =this.state.mutualConnections.map(user => {
@@ -82,18 +102,19 @@ async componentDidMount(){
             <Connections data={user}/>
         )
 	})
-	let jobs=null;
-      jobs =this.state.recommended_jobs.slice(0, 10).map(job => {
+		// Code for showing jobs you may like
+	// let jobs=null;
+    //   jobs =this.state.recommended_jobs.slice(0, 10).map(job => {
 		
-        return(
-            <RecommendedJobs data={job}/>
-        )
-	})
+    //     return(
+    //         <RecommendedJobs data={job}/>
+    //     )
+	// })
 
 
     return (
       <div>
-      <Header />
+      {x}
 
       <div className="main-section pad-top-15">
 				<div className="container">
@@ -105,12 +126,12 @@ async componentDidMount(){
 										<div class="user-profile">
 											<div class="username-dt">
 												<div class="usr-pic">
-													<img src="http://via.placeholder.com/100x100" alt="" />
+													<img src={this.state.user_profile_image} alt="" />
 												</div>
 											</div>
 											<div class="user-specs">
 												<h3>{this.state.fname} {this.state.lname}</h3>
-												<span>Graphic Designer at Self Employed</span>
+												<span>{this.state.headline}</span>
 											</div>
 										</div>
 										<ul class="user-fw-status">
@@ -124,42 +145,6 @@ async componentDidMount(){
 										</ul>
 									</div>
 
-									<div class="suggestions full-width">
-										<div class="sd-title">
-											<h3>Suggestions</h3>
-											<i class="la la-ellipsis-v"></i>
-										</div>
-										<div class="suggestions-list">
-											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="" />
-												<div class="sgt-text">
-													<h4>Jessica William</h4>
-													<span>Graphic Designer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="" />
-												<div class="sgt-text">
-													<h4>John Doe</h4>
-													<span>PHP Developer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-								
-											<div class="suggestion-usd">
-												<img src="http://via.placeholder.com/35x35" alt="" />
-												<div class="sgt-text">
-													<h4>John Doe</h4>
-													<span>PHP Developer</span>
-												</div>
-												<span><i class="la la-plus"></i></span>
-											</div>
-											<div class="view-more">
-												<a href="#" title="">View More</a>
-											</div>
-										</div>
-									</div>
                                 </div>
                             </div>
 
@@ -205,16 +190,16 @@ async componentDidMount(){
 
                                 </div>
                             </div>
-
-                            <div className="col-lg-3 pd-right-none no-pd" style ={{backgroundColor: "white",border: "1px solid darkgrey"}}>
+				{/* DOM for Joobs you may Like */}
+                            {/* <div className="col-lg-3 pd-right-none no-pd" style ={{backgroundColor: "white",border: "1px solid darkgrey"}}>
                             <div className="sd-title1">
-											<h3>Jobs you may like</h3>
+											<h3 style={{"fontWeight":"bold"}}>Jobs you may like</h3>
 											<i class="la la-ellipsis-v"></i>
 										</div>
                                
 										{jobs}
 								
-                            </div>
+                            </div> */}
 
                         </div>{/*Class row */}			
                     </div>

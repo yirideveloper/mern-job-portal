@@ -166,6 +166,10 @@ exports.connect = async (req, res, next) => {
     console.log('loggedin role', typeof (loggedInUserType))
     let connectToUserType = userAccount.role
     console.log('connect to user type role', connectToUserType)
+    let already = await tx.run('Match (a {userid:{loggedIn}})-[:FRIEND]-(b {userid:{connectTo}}) return a,b', { loggedIn: loggedInUser, connectTo: connectToUser })
+    if (already.records.length !== 0) {
+      throw new APIError('Already Connected to this user')
+    }
     let r1 = await tx.run('MATCH (a {userid:{loggedIn}}) return a.userid', { loggedIn: loggedInUser })
     console.log('1std', r1)
     if (r1.records.length !== 0) {
@@ -213,6 +217,7 @@ exports.mutual = async (req, res, next) => {
     if (!userAccount) throw new APIError(`No user associated with id: ${connectToUser}`, httpStatus.NOT_FOUND)
     let uId = '' + req.params.userId
     var connections = []
+    var suggested = []
     var obj = {}
     let result = await neo4jSession.run('MATCH (a {userid:{emailadd}})--(b)--(c) return c', {emailadd: uId})
     console.log('rr', result)
@@ -231,6 +236,15 @@ exports.mutual = async (req, res, next) => {
     }
     if (connections.length === 0) {
       response.message = 'No mutual connections'
+      const recruiter = await Recruiter.find().exec()
+      for (var i = 0; i < recruiter.length; i++) {
+        let temp = JSON.stringify(recruiter[i])
+        let rec = JSON.parse(temp)
+        if (rec._id !== uId) {
+          suggested.push(rec)
+        }
+      }
+      connections = suggested.splice(0, 4)
     } else {
       response.message = 'SUCCESS'
     }
