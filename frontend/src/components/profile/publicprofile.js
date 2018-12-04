@@ -40,8 +40,7 @@ class PublicProfile extends Component {
                 'summary': '',
                 'createdAt': '', 
                 'updatedAt' : '',
-                 recommended_jobs : [],
-                 headline :  ""
+                 recommended_jobs : []
                 
             }
     
@@ -146,9 +145,7 @@ class PublicProfile extends Component {
                             skills : userdata['skills'],
                             summary : userdata['summary'],
                             createdAt : userdata['createdAt'],
-                            updatedAt : userdata['updatedAt'],
-                            headline : userdata['headline'],
-                            
+                            updatedAt : userdata['updatedAt']
                         });
                          
                     }
@@ -217,24 +214,22 @@ class PublicProfile extends Component {
     {
         var rec_jobs = this.state.recommended_jobs.map((jobs)=>{
             console.log(jobs)
-         return(
-            <div>
-            <div className="row">
-              <div className="col-md-3">
-                <img src={S3_URL+jobs.company_logo} class="img-fluid job-card-image" alt="" />
-              </div>
-             <Link to={`/companypage/${jobs._id}`}> <div className="col-md-7">
-                <p style={{ fontSize: "12px", padding : "-1px"  }}>{jobs.title}</p>
-                <p style={{ fontSize: "10px" }}>{jobs.function}</p>
-                <p style={{ fontSize: "8px" }}>{jobs.type}</p>
-              </div>
-              </Link>
-            </div>
-            <hr />
-          </div>
-        );
-      });
-  
+         return(<div>
+             <div className="row">
+                  <div className="col-md-3">
+                      <img src="" class="img-fluid job-card-image" alt="" />
+                  </div>
+                  <div className="col-md-7">
+                      <p style={{fontSize : "15px"}}>{jobs.title}</p>
+                      <p style={{fontSize : "14px"}}>{jobs.function}</p>
+                      <p style={{fontSize : "12px"}}>{jobs.type}</p>
+
+                  </div>
+           </div>
+      <hr/>
+      </div>);
+        })
+
     return (
         <div>
             <Header />
@@ -257,7 +252,7 @@ class PublicProfile extends Component {
                                                         </div>{ /* <!--user-pro-img end--> */}
                                                         <div className="user_pro_status">
                                                             <h3 className="profile-user-name">{this.state.firstname} {this.state.lastname}</h3>
-                                                            <h5 className="profile-user-subname">{this.state.headline ? this.state.headline : "M.S. in Software Engineering"}</h5>
+                                                            <h5 className="profile-user-subname">M.S Software Engineering | Actively seeking Summer Internships - 2019</h5>
                                                             <p className="location-text">
                                                                 {this.state.city}
                                                             </p>

@@ -1123,28 +1123,44 @@ class profile extends Component {
     }
 
     var rec_jobs;
+    if(check=="applicant"){
     rec_jobs = this.state.recommended_jobs.map(jobs => {
       console.log(jobs);
       return (
         <div>
           <div className="row">
             <div className="col-md-3">
-              <img src={S3_URL+jobs.company_logo} class="img-fluid job-card-image" alt="" />
+              <img src="" class="img-fluid job-card-image" alt="" />
             </div>
-           <Link to={`/companypage/${jobs._id}`}> <div className="col-md-7">
-              <p style={{ fontSize: "12px" }}>{jobs.title}</p>
-              <p style={{ fontSize: "10px" }}>{jobs.function}</p>
-              <p style={{ fontSize: "8px" }}>{jobs.type}</p>
+            <div className="col-md-7">
+              <p style={{ fontSize: "15px" }}>{jobs.title}</p>
+              <p style={{ fontSize: "14px" }}>{jobs.function}</p>
+              <p style={{ fontSize: "12px" }}>{jobs.type}</p>
             </div>
-            </Link>
           </div>
           <hr />
         </div>
       );
     });
+}
 
 
-
+    var jobsyoumaylike;
+    jobsyoumaylike = <div><p style={{fontSize: "20px", color: "black",textAlign: "center"}}>
+                            Jobs you may like
+                        </p>
+                        <hr />
+                        <div
+                            style={{
+                            height: "auto",
+                            backgroundColor: "#FFF",
+                            marginTop: "-5px",
+                            paddingTop: "10px"
+                            }}
+                        >
+                            {rec_jobs}
+                        </div>
+                        </div>
 
     console.log(this.state);
     
@@ -1171,7 +1187,7 @@ class profile extends Component {
                               </section>
                               <div className="user-pro-img">
                                 <img
-                                  src={S3_URL+this.state.userimage}
+                                  src={this.state.userimage}
                                   alt="LinkedIn"
                                   className="user-image profile-user-image"
                                   onClick={() => this.changeDocument("PROFILE")}
@@ -1515,21 +1531,7 @@ class profile extends Component {
                 </a>
               </div>
               
-              <div><p style={{fontSize: "20px", color: "black",textAlign: "center"}}>
-                            Jobs you may like
-                        </p>
-                        <hr />
-                        <div
-                            style={{
-                            height: "auto",
-                            backgroundColor: "#FFF",
-                            marginTop: "-5px",
-                            paddingTop: "10px"
-                            }}
-                        >
-                            {rec_jobs}
-                        </div>
-                        </div>
+           {check=="applicant" ?   {jobsyoumaylike}  : ""}
             </div>
             {/* <!--right-sidebar end--> */}
           </div>
