@@ -45,15 +45,6 @@ class HomePage extends React.Component {
       this.props.history.push("/applicanthome");
     }
 
-    if(profile != 'recruiter' || !user || !user_token)
-		{
-			//Do nothing
-    }
-    else 
-    {
-      this.props.history.push("/recruiterhome");
-    }
-
 
 		/*****************************************/
 
@@ -65,7 +56,7 @@ class HomePage extends React.Component {
     try {
       //this.props.dispatch(fetchProfile());
       if (nextProps.LoginReducer.user_id && nextProps.LoginReducer.user_token) {
-        //this.props.history.push("/profile");
+        this.props.history.push("/profile");
       }
     } catch (e) {
       console.log(e);
