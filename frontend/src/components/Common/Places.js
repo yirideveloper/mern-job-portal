@@ -93,7 +93,7 @@ class Places extends Component {
           <div>
             <input
               {...getInputProps({
-                placeholder: 'Place',
+                placeholder: 'Search Places ...',
                 className: 'location-search-input form-control',
               })}
             />
