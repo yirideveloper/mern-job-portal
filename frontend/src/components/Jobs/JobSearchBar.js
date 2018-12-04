@@ -14,7 +14,6 @@ class JobSearchBar extends Component {
     this.onChangeSearchJob = this.onChangeSearchJob.bind(this)
     this.onChangeLocation = this.onChangeLocation.bind(this)
     this.checkret = this.checkret.bind(this);
-    this.route = this.route.bind(this);
 }
 
   onChangeSearchJob(event){
@@ -38,15 +37,6 @@ class JobSearchBar extends Component {
     })
     
   }
-
-  route(e){
-    e.preventDefault();
-    console.log("Props",this.props);
-    if (this.state.searchJobName && this.state.latitude && this.state.longitude){
-      window.location.href=`/searchedjobs/${this.state.searchJobName}/${this.state.latitude}/${this.state.longitude}`;
-    }
-  }
-
   
   render() {
     return (
@@ -62,8 +52,7 @@ class JobSearchBar extends Component {
       
       </div>
       <div className="col-sm-2 searchButton">    
-      
-      <button type="button" onClick={this.route}>Search</button>
+        <Link to={`/searchedjobs/${this.state.searchJobName}/${this.state.latitude}/${this.state.longitude}`}><button type="button">Search</button></Link>
       </div>
       </div>
       

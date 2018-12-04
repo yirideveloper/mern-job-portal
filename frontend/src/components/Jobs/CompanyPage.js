@@ -198,9 +198,7 @@ class CompanyPage extends Component {
     {
         if(sessionStorage.getItem('user_id')){
             try {
-                await api('PUT',"/log/click/"+this.state.jobId);
                 let job = await api("GET",`/jobs/${this.state.jobId}`);
-
                 this.setState({
                   jobskill : job.data.payLoad.skills ,
                   jobtitle : job.data.payLoad.title,

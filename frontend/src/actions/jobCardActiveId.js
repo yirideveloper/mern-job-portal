@@ -11,4 +11,3 @@ export const  set_active_id=(id)=>{
         payload:id
     }
 }
-
