@@ -33,10 +33,8 @@ if(id){
       company:ret.data.payLoad.user.company
     })
   } catch (error) {
-    console.log("error",Object.keys(error), error.response);
-    if(error.response){
+    console.log(Object.keys(error), error.response);
     printError(error);
-    }
   }
 
 }else{
