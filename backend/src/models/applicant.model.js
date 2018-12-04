@@ -40,8 +40,7 @@ const applicantSchema = new Schema({
     type: String
   },
   profile_image: {
-    type: String,
-    default: 'default-profile-image.jpg'
+    type: String
   },
   banner_image: {
     type: String

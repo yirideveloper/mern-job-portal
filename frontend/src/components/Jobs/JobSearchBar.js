@@ -7,9 +7,7 @@ class JobSearchBar extends Component {
 
     this.state ={
       searchJobName : "",
-      latitude: "",
-      longitude:""
-
+      searchLocation : ""
     }
     this.onChangeSearchJob = this.onChangeSearchJob.bind(this)
     this.onChangeLocation = this.onChangeLocation.bind(this)
@@ -30,10 +28,9 @@ class JobSearchBar extends Component {
 
   checkret(data)
   {
-    console.log("location",data);
+    console.log(data);
     this.setState({
-      latitude: data.coordinates.latitude,
-      longitude:data.coordinates.longitude
+      searchLocation : data.street
     })
     
   }
@@ -52,7 +49,7 @@ class JobSearchBar extends Component {
       
       </div>
       <div className="col-sm-2 searchButton">    
-        <Link to={`/searchedjobs/${this.state.searchJobName}/${this.state.latitude}/${this.state.longitude}`}><button type="button">Search</button></Link>
+        <Link to={`/searchedjobs/${this.state.searchJobName}/${this.state.searchLocation}`}><button type="button">Search</button></Link>
       </div>
       </div>
       

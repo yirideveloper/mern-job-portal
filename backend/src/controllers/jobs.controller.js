@@ -6,7 +6,6 @@ const sql = require('./../services/sql')
 const APIError = require('../utils/APIError')
 const Job = require('../models/job.model')
 const Applicant = require('../models/applicant.model')
-const RedisClient = require('../services/redis')
 
 exports.get = async (req, res, next) => {
   try {
@@ -168,8 +167,6 @@ exports.recommendation = async (req, res, next) => {
         jobs.splice(index, 1)
       }
     }
-
-    RedisClient.set(req.user._id, JSON.stringify(response.payLoad))
     res.status(httpStatus.OK)
     res.send(response)
   } catch (error) {
