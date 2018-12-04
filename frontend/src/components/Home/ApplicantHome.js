@@ -28,14 +28,6 @@ class ApplicantHome extends Component {
 		try {
 			let user= await api('GET','/users/'+sessionStorage.getItem('user_id'));
 			console.log("user",user);
-
-			if((user.data.payLoad.user.profile_image).indexOf("https://")==-1)
-                        {
-                          user.data.payLoad.user.profile_image = S3_URL + user.data.payLoad.user.profile_image;
-                        }
-
-
-
 			this.setState({
 			  fname:user.data.payLoad.user.name.first,
 			  lname:user.data.payLoad.user.name.last,
@@ -94,7 +86,7 @@ class ApplicantHome extends Component {
 										<div class="user-profile">
 											<div class="username-dt">
 												<div class="usr-pic">
-													<img src={this.state.user_profile_image} alt="" />
+													<img src={S3_URL+this.state.user_profile_image} alt="" />
 
 												</div>
 											</div>
