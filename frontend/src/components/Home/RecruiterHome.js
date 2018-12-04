@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import RecruiterHeader from "../Common/RecruiterHeader"
 import JobsByskill from "../Jobs/JobsBySkill";
 import "./Home.css";
-import Chart from 'chart.js';
 
 
 class ApplicantHome extends Component {
@@ -150,15 +149,7 @@ class ApplicantHome extends Component {
                   {/******GRAPH DASHBOARD********/}
                   <div className="row col-lg-12">
                       <div className="col-lg-12 rec-dashboard-box">
-                          <div className="col-lg-4 infobox i1">
-                            
-                          </div>
-                          <div className="col-lg-4 infobox i2">
-                          
-                          </div>
-                          <div className="col-lg-4 infobox i3">
-                          
-                          </div>
+                          asd
                       </div>  
                       
                   </div>
@@ -178,7 +169,7 @@ class ApplicantHome extends Component {
                           <canvas id="myChart3"></canvas>
                       </div>
                       <div className="col-lg-12 mt-top rec-dashboard-box">
-                          <div className="grph-headings">Clicks Per day for Jobs ( Last 30 days )</div>
+                          <div className="grph-headings">City Wise Hot Jobs</div>
                           <canvas id="myChart4"></canvas>
                       </div>
                   </div>
