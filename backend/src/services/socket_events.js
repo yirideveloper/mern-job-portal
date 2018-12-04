@@ -1,6 +1,3 @@
-const mongoose = require('mongoose');
-const Thread = require('../models/conversation.model')
-
 module.exports = {
     init : function(i)
     {
@@ -32,25 +29,10 @@ module.exports = {
             });
 
 
-            socket.on('private_chat_handler',async (d) => {
+            socket.on('private_chat_handler',function(d){
                 console.log(d);
                 let room = d['thread'];
                 socket.broadcast.to(room).emit('message_posted', d);
-                console.log(mongoose);
-                // PUSH INTO A THREAD
-                const threadId = d['thread'];
-                const senderId = d['senderID'];
-                const messagesend = d['payload'];
-                const thread = await Thread.findById(threadId).exec()
-                const message = {
-                  sender: senderId,
-                  body: messagesend
-                }
-                console.log(message);
-                thread.history.push(message)
-                await thread.save();
-                // END OF PUSH
-
 
             });
 
