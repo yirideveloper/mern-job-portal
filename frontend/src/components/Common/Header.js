@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { IMAGE_PATHS} from '../../constants/routes';
 import { Link } from 'react-router-dom'
 import $ from 'jquery';
 import { connect } from "react-redux";
@@ -9,8 +10,6 @@ import ReactAutocomplete from "react-autocomplete";
 import Autocomplete from "react-autocomplete";
 import { api , printError, printMessage} from '../../services/';
 import profileplaceholder from '../Files/Images/profile-placeholder.png'
-import { IMAGE_PATHS, S3_URL } from "../../constants/routes";
-
 
 class Header extends Component {
 
@@ -281,7 +280,7 @@ class Header extends Component {
 									style={{ backgroundColor: highlighted ? '#FFF' : '#FFF',padding : '10px','cursor' : 'pointer'}}
 								>
 									<span id={item.userid} className="user-image">
-										<img src={S3_URL+item.userimage}  className="search-user-image" />
+										<img src={item.userimage}  className="search-user-image" />
 									</span>
 									<span className="search-firstname">{item.label}</span>
 									<span className="search-lastname">{item.lastname}</span>
@@ -295,6 +294,7 @@ class Header extends Component {
 									console.log(item.userid)
 									this.openPublicSearchProfile(item.userid,value);
 								  }}
+						
 							/> 
 
  
