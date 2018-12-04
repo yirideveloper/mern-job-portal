@@ -208,8 +208,6 @@ class Header extends Component {
 				console.log(ret);
 				if(ret.status>=200 && ret.status<300)
 				{
-					sessionStorage.clear();
-					localStorage.clear();
 					this.props.history.push("/");
 				}
 			}
